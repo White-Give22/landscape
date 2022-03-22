@@ -37,7 +37,7 @@ const SNOWFLAKES = [];
 let song;
 
 function setup() {
-  song=loadSound("",loaded);
+  song=loadSound("snow.mp3");
   noStroke();
   cmt1 = int(random(cm1.length));
   bgco1 = int(random(bgc1.length));
@@ -55,9 +55,7 @@ function setup() {
       }
   }
 
-function loaded(){
-  song.play();
-}
+
 
 function draw() {
   let canvas=createCanvas(windowWidth/2, windowHeight*0.98);
