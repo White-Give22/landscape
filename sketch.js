@@ -3,107 +3,102 @@ let mosize2;
 let mosize3;
 let mosize4;
 let mooncolor;
-//let cm=['cy','cg','cb','cp'];
-//let skyc=['scy','scb','scg','scp']
-let cy;
-let cy1 = 199;
-let cy2 = 171;
-let cy3 = 95;
-let cg;
-let cg1 = 150;
-let cg2 = 184;
-let cg3 = 106;
-let cb;
-let cb1 = 46;
-let cb2 = 148;
-let cb3 = 141;
-let cp;
-let cp1 = 97;
-let cp2 = 72;
-let cp3 = 102;
 
-let scy;
-let scy1 = 186;
-let scy2 = 143;
-let scy3 = 63;
-let scb;
-let scb1=91;
-let scb2=139;
-let scb3=168;
-let scg;
-let scg1=91;
-let scg2=168;
-let scg3=151;
-let scp;
-let scp1=156;
-let scp2=116;
-let scp3=194;
+let cmt1;
+let cmt2;
+let cmt3;
 
-let mcb;
-let mcb1=199;
-let mcb2=225;
-let mcb3=252;
-let mcp;
-let mcp1=255;
-let mcp2=217;
-let mcp3=239;
-let mcy;
-let mcy1=247;
-let mcy2=247;
-let mcy3=215;
+let cm1 = ["199", "150", "46", "97"];
+let cm2 = ["171", "184", "148", "72"];
+let cm3 = ["95", "106", "141", "102"];
 
+let bgco1;
+let bgco2;
+let bgco3;
+
+let bgc1 = ["205", "255", "205", "225", "0"];
+let bgc2 = ["221", "214", "250", "194", "0"];
+let bgc3 = ["247", "212", "240", "255", "0"];
+
+let mco1;
+let mco2;
+let mco3;
+
+let mc1 = ["240", "97", "105"];
+let mc2 = ["86", "64", "150"];
+let mc3 = ["55", "173", "83"];
+
+const SNOWFLAKES_PER_LAYER = 50;
+const MAX_SIZE = 8;
+const GRAVITY = 0.75;
+const LAYER_COUNT = 4;
+const SNOWFLAKES = [];
+
+let song;
 
 function setup() {
-  
-  frameRate(10);
+  song=loadSound("",loaded);
+  noStroke();
+  cmt1 = int(random(cm1.length));
+  bgco1 = int(random(bgc1.length));
+  mco1 = int(random(mc1.length));
+  for (let l = 0; l < LAYER_COUNT; l++) {
+        SNOWFLAKES.push([]);
+        for (let i = 0; i < SNOWFLAKES_PER_LAYER; i++) {
+          SNOWFLAKES[l].push({
+            x: random(windowWidth/2),
+            y: random( windowHeight*0.98),
+            mass: random(0.75, 1.25),
+            l: l + 1
+          });
+        }
+      }
+  }
+
+function loaded(){
+  song.play();
 }
 
 function draw() {
-  createCanvas(windowWidth, windowHeight);
-  background(255, 217, 239);
+  let canvas=createCanvas(windowWidth/2, windowHeight*0.98);
+  canvas.parent('myCanvas');
+  background(bgc1[bgco1], bgc2[bgco1], bgc3[bgco1]);
 
-  starbg();
-  sun();
+  moon();
   mountain();
-}
+  for (let l = 0; l < SNOWFLAKES.length; l++) {
+    const LAYER = SNOWFLAKES[l];
 
-function starbg() {
-  for (let i = 0; i < 15; i++) {
-    fill(255);
-    noStroke();
-    let x = random(width);
-    let y = random(height /2);
-    ellipse(x, y, 2.5, 2.5);
-  }
-  for (let i = 0; i < 25; i++) {
-    fill(255);
-    noStroke();
-    let x = random(width);
-    let y = random(height /2);
-    ellipse(x, y, 1.5, 1.5);
+    for (let i = 0; i < LAYER.length; i++) {
+      const snowflake = LAYER[i];
+      fill(255);
+      circle(snowflake.x, snowflake.y, (snowflake.l * MAX_SIZE) / LAYER_COUNT);
+      updateSnowflake(snowflake);
+    }
   }
 }
 
-function sun() {
+
+function moon() {
   msize = random(10, 20);
   msize2 = random(50, 85);
   msize3 = random(100, 115);
   msize4 = random(115, 130);
 
-  fill(247, 247, 215, msize4);
+  fill(mc1[mco1], mc2[mco1], mc3[mco1], msize4);
   ellipse(width * 0.2, height * 0.15, 85, 85);
-  fill(247, 247, 215, msize3);
+  fill(mc1[mco1], mc2[mco1], mc3[mco1], msize3);
   ellipse(width * 0.2, height * 0.15, 100, 100);
-  fill(247, 247, 215, msize2);
+  fill(mc1[mco1], mc2[mco1], mc3[mco1], msize2);
   ellipse(width * 0.2, height * 0.15, 115, 115);
-  fill(247, 247, 215, msize);
+  fill(mc1[mco1], mc2[mco1], mc3[mco1], msize);
   ellipse(width * 0.2, height * 0.15, 130, 130);
-  fill(247, 247, 215);
+  fill(mc1[mco1], mc2[mco1], mc3[mco1]);
   ellipse(width * 0.2, height * 0.15, 70, 70);
 }
 
 function mountain() {
-  fill(238, 241, 251, 50);
+  fill(cm1[cmt1], cm2[cmt1], cm3[cmt1], 50);
   beginShape();
   vertex(width * 0, height);
   vertex(width * 0, height * 0.7);
@@ -116,7 +111,7 @@ function mountain() {
   vertex(width, height);
   endShape(CLOSE);
 
-  fill(238, 241, 251, 100);
+  fill(cm1[cmt1], cm2[cmt1], cm3[cmt1], 100);
   beginShape();
   vertex(width * 0, height);
   vertex(width * 0, height * 0.7);
@@ -127,7 +122,7 @@ function mountain() {
   vertex(width, height);
   endShape(CLOSE);
 
-  fill(238, 241, 251, 200);
+  fill(cm1[cmt1], cm2[cmt1], cm3[cmt1], 200);
   beginShape();
   vertex(width * 0, height);
   vertex(width * 0, height * 0.6);
@@ -140,7 +135,7 @@ function mountain() {
   vertex(width, height);
   endShape(CLOSE);
 
-  fill(238, 241, 251);
+  fill(cm1[cmt1], cm2[cmt1], cm3[cmt1]);
   beginShape();
   vertex(width * 0, height);
   vertex(width * 0, height * 0.9);
@@ -153,4 +148,22 @@ function mountain() {
   vertex(width, height * 0.95);
   vertex(width, height);
   endShape(CLOSE);
+}
+
+
+function updateSnowflake(snowflake) {
+  const diameter = (snowflake.l * MAX_SIZE) / LAYER_COUNT;
+  if (snowflake.y > height + diameter) snowflake.y = -diameter;
+  else snowflake.y += GRAVITY * snowflake.l * snowflake.mass;
+}
+
+function mousePressed() {
+  if (mouseX > width * 0.15 && mouseX < width * 0.25){
+      if (mouseY > height * 0.1 && mouseY < height * 0.25){
+  cmt1 = int(random(cm1.length));
+  bgco1 = int(random(bgc1.length));
+
+  mco1 = int(random(mc1.length));
+  }
+}
 }
