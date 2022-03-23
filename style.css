@@ -19,5 +19,8 @@ canvas{
 }
 
 p{
-
+  text-align: center;
+font-style: italic;
+color: #2f5b69;
+font-size: 40px;
 }
