@@ -13,9 +13,9 @@ canvas{
   margin-top: 5px;
   margin-left: auto;
   margin-right: auto;
-  border-style: outset;
+  border-style: sollid;
   border-width: 18px;
-  border-color: #6e552f;
+  border-color: #6e552f #f2dea7 #9dc2a9 #a5b8c2;
 }
 
 p{
