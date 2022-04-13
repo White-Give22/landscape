@@ -2,11 +2,8 @@ html, body {
   margin: 0;
   padding: 0;
   background-image: url("bg2.jpg");
-  height: 100%;
-  background-position: FILL;
-  background-repeat: no-repeat;
-  background-size: cover;
-
+   background-repeat: no-repeat;
+   background-size: cover;
 }
 canvas{
   display:block;
@@ -25,8 +22,9 @@ color: #2f5b69;
 font-size: 30px;
 }
 
-audio{
-  margin-bottom: 50px;
+.a{
+  display: block;
+  position:absolute;
 }
 
 .button {
@@ -38,3 +36,10 @@ audio{
     margin-top: 20px;
     margin-left: 40px;
   }
+  pre{
+  font: 20px Ink Free, sans-serif;
+  line-height: 1.5;
+  color: #85001f;
+  text-align: center;
+
+}
