@@ -28,3 +28,14 @@ font-size: 30px;
 audio{
   margin-bottom: 50px;
 }
+
+.button {
+    display: inline-block;
+    background-color: black;
+    color: pink;
+    padding: 20px 40px;
+    text-decoration: none;
+    margin-top: 20px;
+    margin-left: 40px;
+
+  }
