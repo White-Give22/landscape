@@ -27,15 +27,7 @@ font-size: 30px;
   position:absolute;
 }
 
-.button {
-    display: inline-block;
-    background-color: black;
-    color: pink;
-    padding: 20px 40px;
-    text-decoration: none;
-    margin-top: 20px;
-    margin-left: 40px;
-  }
+
 pre{
   font: 20px Ink Free, sans-serif;
   line-height: 1.5;
